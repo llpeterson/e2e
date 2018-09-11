@@ -21,8 +21,8 @@ identifying processes on remote hosts and correlating requests with
 responses. It may also need to overcome some or all of the limitations
 of the underlying network outlined in the problem statement at the
 beginning of this chapter. While TCP overcomes these limitations by
-providing a reliable byte-stream service, it doesn't match the
-request/reply paradigm very well either—going to the trouble to
+providing a reliable byte-stream service, it doesn't perfectly match the
+request/reply paradigm either—going to the trouble to
 establish a TCP connection just to exchange a pair of messages seems
 like overkill. This section describes a third category of transport
 protocol, called *Remote Procedure Call* (RPC), that more closely
@@ -107,13 +107,13 @@ Two functions that must be performed by any RPC protocol are:
 - Match each reply message to the corresponding request message.
 
 The first problem has some similarities to the problem of identifying
-nodes in a network, something that we saw in previous chapters (IP
-addresses, for example). One of the design choices when identifying
-things is whether to make this name space flat or hierarchical. A flat
-name space would simply assign a unique, unstructured identifier (e.g.,
-an integer) to each procedure, and this number would be carried in a
-single field in an RPC request message. This would require some kind of
-central coordination to avoid assigning the same procedure number to two
+nodes in a network, something IP addresses do, for example). One of
+the design choices when identifying things is whether to make this
+name space flat or hierarchical. A flat name space would simply assign
+a unique, unstructured identifier (e.g., an integer) to each
+procedure, and this number would be carried in a single field in an
+RPC request message. This would require some kind of central
+coordination to avoid assigning the same procedure number to two
 different procedures. Alternatively, the protocol could implement a
 hierarchical name space, analogous to that used for file pathnames,
 which requires only that a file's "basename" be unique within its
@@ -129,7 +129,7 @@ reply message had its message ID field set to the same value as the
 request message. When the client RPC module receives the reply, it uses
 the message ID to search for the corresponding outstanding request. To
 make the RPC transaction appear like a local procedure call to the
-caller, the caller is blocked (e.g., by using a semaphore) until the
+caller, the caller is blocked until the
 reply message is received. When the reply is received, the blocked
 caller is identified based on the request number in the reply, the
 remote procedure's return value is obtained from the reply, and the
@@ -138,10 +138,10 @@ caller is unblocked so that it can return with that return value.
 One of the recurrent challenges in RPC is dealing with unexpected
 responses, and we see this with message IDs. For example, consider the
 following pathological (but realistic) situation. A client machine sends
-a request message with a message ID of $0$, then crashes and reboots,
-and then sends an unrelated request message, also with a message ID of
-$0$. The server may not have been aware that the client crashed and
-rebooted and, upon seeing a request message with a message ID of $0$,
+a request message with a message ID of 0, then crashes and reboots,
+and then sends an unrelated request message, also with a message ID
+of 0. The server may not have been aware that the client crashed and
+rebooted and, upon seeing a request message with a message ID of 0,
 acknowledges it and discards it as a duplicate. The client never gets a
 response to the request.
 
@@ -163,15 +163,18 @@ that networks are not perfect channels. Two such functions are:
 
 - Support large message sizes through fragmentation and reassembly
 
-An RPC protocol might implement reliability because the underlying
-protocols (e.g., UDP/IP) do not provide it, or perhaps to recover more
-quickly or efficiently from failures that otherwise would eventually be
-repaired by underlying protocols. An RPC protocol can implement
-reliability using acknowledgments and timeouts, similarly to TCP. The
-basic algorithm is straightforward, as illustrated by the timeline given
-in [Figure 3](#chan-timeline1). The client sends a request message and
-the server acknowledges it. Then, after executing the procedure, the
-server sends a reply message and the client acknowledges the reply.
+An RPC protocol might "define this problem away" by choosing to run
+on top of a reliable protocol like TCP, but in many cases, the RCP
+protocol implements its own reliable message delivery layer on top
+of an unreliable substrate (e.g., UDP/IP). Such an RPC protocol would
+likely implement reliability using acknowledgments and timeouts,
+similarly to TCP.
+
+The basic algorithm is straightforward, as
+illustrated by the timeline given in [Figure 3](#chan-timeline1). The
+client sends a request message and the server acknowledges it. Then,
+after executing the procedure, the server sends a reply message and
+the client acknowledges the reply.
 
 <figure class="line">
 	<a id="chan-timeline1"></a>
