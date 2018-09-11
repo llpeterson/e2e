@@ -6,7 +6,7 @@ transferring files, sending email, etc. However, at least as early as
 1981, experiments were under way to carry real-time traffic, such as
 digitized voice samples, over packet networks. We call an application
 "real-time" when it has strong requirements for the timely delivery of
-information. Internet telephony, or Voice over IP (VoIP), is a classic
+information. Voice over IP (VoIP), is a classic
 example of a real-time application, because you can't easily carry on a
 conversation with someone if it takes more than a fraction of a second
 to get a response. As we will see shortly, real-time applications place
@@ -25,16 +25,22 @@ applications and *streaming* applications. An early and at one time
 popular example of the interactive class is `vat`, a multiparty
 audioconferencing tool that is often used over networks supporting IP
 multicast. The control panel for a typical `vat` conference is shown
-in [Figure 1](#vat). Internet telephony is also a class of interactive
-application and probably the most widely used one at the time of
-writing. Internet-based multimedia conferencing applications
-are another example. Modern instant messaging applications also use
-real-time audio and video. These are the sort of applications with the
-most stringent real-time requirements.
+in [Figure 1](#vat). VoIP is also a class of interactive application
+and probably the most widely used today. Internet-based multimedia
+conferencing applications, like the commercial products WebEx and
+GoToMeeting are another example. These are the sort of applications
+with the most stringent real-time requirements.
+
+> Even though it's been overtaken by a plethora of commercial
+> products, we use `vat` as a running example in this section
+> precisely because it is not a commercial product, and so is easy
+> for us to describe. The principles remain the same, which makes
+> since when you consider that `vat` was the application that
+> introduced interactive real-time to the Internet in the first place.
 
 Streaming applications typically deliver audio or video streams from a
 server to a client and are typified by such commercial products as
-RealAudio. Streaming video, typified by YouTube, has become
+Spotify. Streaming video, typified by YouTube and Netflix, has become
 one of the dominant forms of traffic on the Internet. Because streaming
 applications lack human-to-human interaction, they place somewhat less
 stringent real-time requirements on the underlying protocols. Timeliness
