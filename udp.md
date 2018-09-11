@@ -7,7 +7,7 @@ processes running on any given host, so the protocol needs to add a
 level of demultiplexing, thereby allowing multiple application processes
 on each host to share the network. Aside from this requirement, the
 transport protocol adds no other functionality to the best-effort
-service provided by the underlying network. The Internet's User Datagram
+service provideaird by the underlying network. The Internet's User Datagram
 Protocol is an example of such a transport protocol.
 
 The only interesting issue in such a protocol is the form of the address
@@ -29,9 +29,9 @@ that the UDP port field is only 16 bits long. This means that there are
 up to 64K possible ports, clearly not enough to identify all the
 processes on all the hosts in the Internet. Fortunately, ports are not
 interpreted across the entire Internet, but only on a single host. That
-is, a process is really identified by a port on some particular host—a
-(port, host) pair. In fact, this pair constitutes the demultiplexing key
-for the UDP protocol.
+is, a process is really identified by a port on some particular host: a
+(port, host) pair. This pair constitutes the demultiplexing key for
+the UDP protocol.
 
 The next issue is how a process learns the port for the process to which
 it wants to send a message. Typically, a client process initiates a

@@ -5,11 +5,11 @@
 
 ## Problem: Getting Processes to Communicate
 
-The previous three chapters have described various technologies that can
-be used to connect together a collection of computers, ranging from
-simple Ethernets and wireless networks to global-scale internetworks.
-The next problem is to turn this host-to-host packet delivery service
-into a process-to-process communication channel. This is the role played
+Many technologies that can be used to connect together a collection of
+computers, ranging from simple Ethernets and wireless networks to
+global-scale internetworks. Once interconnect, the next problem is to
+turn this host-to-host packet delivery service into a
+process-to-process communication channel. This is the role played
 by the *transport* level of the network architecture, which, because it
 supports communication between application programs running in end
 nodes, is sometimes called the *end-to-end* protocol.
@@ -56,11 +56,11 @@ Such a network is said to provide a *best-effort* level of service, as
 exemplified by the Internet.
 
 The challenge, therefore, is to develop algorithms that turn the
-less-than-desirable properties of the underlying network into the high
+less-than-perfect properties of the underlying network into the high
 level of service required by application programs. Different transport
 protocols employ different combinations of these algorithms. This
 chapter looks at these algorithms in the context of four representative
-services---a simple asynchronous demultiplexing service, a reliable
+services—a simple asynchronous demultiplexing service, a reliable
 byte-stream service, a request/reply service, and a service for
 real-time applications.
 
@@ -69,8 +69,9 @@ Internet's User Datagram Protocol (UDP) and Transmission Control
 Protocol (TCP), respectively, to illustrate how these services are
 provided in practice. In the case of a request/reply service, we discuss
 the role it plays in a Remote Procedure Call (RPC) service and what
-features that entails. This discussion is capped off with a description
-of two widely used RPC protocols: SunRPC and DCE-RPC.
+features that entails. The Internet does not have a single RPC
+protocol, so we cap this discussion off with a description of two
+widely used RPC protocols: SunRPC and DCE-RPC.
 
 Finally, real-time applications make particular demands on the transport
 protocol, such as the need to carry timing information that allows audio
