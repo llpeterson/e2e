@@ -6,8 +6,8 @@ transferring files, sending email, etc. However, at least as early as
 1981, experiments were under way to carry real-time traffic, such as
 digitized voice samples, over packet networks. We call an application
 "real-time" when it has strong requirements for the timely delivery of
-information. Voice over IP (VoIP), is a classic
-example of a real-time application, because you can't easily carry on a
+information. Voice over IP (VoIP) is a classic
+example of a real-time application because you can't easily carry on a
 conversation with someone if it takes more than a fraction of a second
 to get a response. As we will see shortly, real-time applications place
 some specific demands on the transport protocol that are not well met
@@ -36,7 +36,8 @@ with the most stringent real-time requirements.
 > precisely because it is not a commercial product, and so is easy
 > for us to describe. The principles remain the same, which makes
 > since when you consider that `vat` was the application that
-> introduced interactive real-time to the Internet in the first place.
+> introduced interactive real-time functionality into the Internet in
+> the first place.
 
 Streaming applications typically deliver audio or video streams from a
 server to a client and are typified by such commercial products as
