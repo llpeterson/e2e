@@ -622,11 +622,18 @@ encapsulated inside an environment that includes all the software
 packages the process needs to run. Docker is today's canonical example
 of a container.
 
+<figure class="line">
+	<a id="rpc-service"></a>
+	<img src="figures/rpc/Slide1.png" width="400px"/>
+	<figcaption>Using RPC to invoke a scalable cloud service.</figcaption>
+</figure>
+
 Back to the claim that a service is essentially an extra level of
 indirection layered on top of a server, all this means is that
 the caller identifies the service it wants to invoke, and a *load
 balancer* directs that invocation to one of the many available server
-processes (containers) that implement that service. Beyond that
+processes (containers) that implement that service, as shown in
+[Figure 9](#rpc-service). Beyond that
 distinction, there is a set of best practices for implementing the
 actual server code that eventually responds to that request, and some
 additional cloud machinery to spin-up/spin-down containers and load
@@ -658,7 +665,15 @@ binary data into a message, (2) multiplexing multiple remote procedure
 calls on a single TCP connection. In other words, gRPC encodes the
 identifier for the remote method as a URI, the request paremeters to
 the remote method as content in the HTTP message, and the return value
-from the remote method in ther HTTP response.
+from the remote method in ther HTTP response. The full gRPC stack is
+depicted in [Figure 10](#grpc-stack). 
+
+<figure class="line">
+	<a id="grpc-stack"></a>
+	<img src="figures/rpc/Slide2.png" width="400px"/>
+	<figcaption>gRPC core stacked on top of HTTP, TLS, and TCP and
+    	supporting a collection of languages.</figcaption>
+</figure>
 
 We discuss TLS in Chapter 8 (in the context of a broad range of
 security topics) and HTTP in Chapter 9 (in the context of what are
