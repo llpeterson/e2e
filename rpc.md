@@ -1,12 +1,12 @@
 # {{ page.title }}
 
-As discussed in Chapter 1, one common pattern of communication used by
-application programs is the request/reply paradigm, also called *message
-transaction*: A client sends a request message to a server, and the
-server responds with a reply message, with the client blocking
+A common pattern of communication used by application programs
+structured according to the *client/server* paradigm is the
+request/reply message transaction: A client sends a request message to a
+server, and the server responds with a reply message, with the client blocking
 (suspending execution) to wait for the reply. [Figure 1](#rpc-timeline)
 illustrates the basic interaction between the client and server in such
-a message transaction.
+an exchange.
 
 <figure class="line">
 	<a id="rpc-timeline"></a>
@@ -23,8 +23,8 @@ of the underlying network outlined in the problem statement at the
 beginning of this chapter. While TCP overcomes these limitations by
 providing a reliable byte-stream service, it doesn't perfectly match the
 request/reply paradigm either—going to the trouble to
-establish a TCP connection just to exchange a pair of messages seems
-like overkill. This section describes a third category of transport
+establish a TCP connection just to exchange a pair of messages is
+overkill in some cases. This section describes a third category of transport
 protocol, called *Remote Procedure Call* (RPC), that more closely
 matches the needs of an application involved in a request/reply message
 exchange.
@@ -596,7 +596,7 @@ are wild and crazy people. Nonetheless, gRPC is popular because it
 makes available to everyone—as open source—a decade's worth of
 experience within Google using RPC to build scalable cloud services.
 
-Before getting into any of the details, there some major differences
+Before getting into the details, there some major differences
 between gRPC and the other two examples we've just covered. The
 biggest is that gRPC is designed for cloud services rather than the
 simpler client/server paradigm that preceeded it. The difference
@@ -605,22 +605,21 @@ world, the client invokes a method on a specific server process
 running on a specific server. One server process is presumed to be
 enough to serve calls from all the client processes that might call it.
 
-With cloud services (and what is now known as *cloud native*),
-the client invokes a method on a *service*, which in order to support
-calls from arbitrarily many clients at the same time, is implemented
-by a scalable number of server processes, each potentially running on
-a different server machine. This is where the cloud comes into play:
-datacenters make a seeminly infinite number of server machines
-available to scale up cloud services. When we use the term "scalable,"
-what we really mean is that the number of identical server processes
-you elect to spin up depends on the workload (i.e., the number of
-clients that want service at any given time) and that number can be
-adjusted dynamically over time. One other detail is that cloud
-services don't typically create a new process, per se, but rather,
-they launch a new *container*, which is essentially a process
-encapsulated inside an environment that includes all the software
-packages the process needs to run. Docker is today's canonical example
-of a container.
+With cloud services, the client invokes a method on a *service*, which
+in order to support calls from arbitrarily many clients at the same
+time, is implemented by a scalable number of server processes, each
+potentially running on a different server machine. This is where the
+cloud comes into play: datacenters make a seemingly infinite number of
+server machines available to scale up cloud services. When we use the
+term "scalable," what we mean is that the number of identical
+server processes you elect to create depends on the workload (i.e.,
+the number of clients that want service at any given time) and that
+number can be adjusted dynamically over time. One other detail is that
+cloud services don't typically create a new process, per se, but
+rather, they launch a new *container*, which is essentially a process
+encapsulated inside an isolated environment that includes all the
+software packages the process needs to run. Docker is today's
+canonical example of a container platform.
 
 <figure class="line">
 	<a id="rpc-service"></a>
@@ -633,40 +632,48 @@ indirection layered on top of a server, all this means is that
 the caller identifies the service it wants to invoke, and a *load
 balancer* directs that invocation to one of the many available server
 processes (containers) that implement that service, as shown in
-[Figure 9](#rpc-service). Beyond that
-distinction, there is a set of best practices for implementing the
-actual server code that eventually responds to that request, and some
-additional cloud machinery to spin-up/spin-down containers and load
-balance requests across those containers. Kubernetes is today's
-canonical example of such a container management system, and the
-*micro-services architecture* is what we call the best practice of
-building services in this cloud native manner. Both are interesting
-topics, but beyond the scope of this book.
+[Figure 9](#rpc-service). The load balancer in can be implemented in
+different ways, including a hardware device, but it is typically
+implemented by a proxy server process that runs in a virtual machine
+(also hosted in the cloud) rather than as a physical appliance.
 
-What we are interested in here is transport protocol at the heart
-of gRPC. Here again, there is a major departure from the two previous
+There is a set of best practices for implementing the actual server
+code that eventually responds to that request, and some additional
+cloud machinery to create/destroy containers and load balance
+requests across those containers. Kubernetes is today's canonical
+example of such a container management system, and the *micro-services
+architecture* is what we call the best practices in building services
+in this cloud native manner. Both are interesting topics, but beyond
+the scope of this book.
+
+What we are interested in here is transport protocol at the core of
+gRPC. Here again, there is a major departure from the two previous
 example protocols, not in terms of fundamental problems that need to
 be addressed, but more in terms of gRPC's approach to addressing them.
 In short, gRPC "outsources" many of the problems to other protocols,
-leaving gRPC to do little more than package those capabilities in an
+leaving gRPC to essentially package those capabilities in an
 easy-to-use form. Let's look at the details.
 
 First, gRPC runs on top of TCP instead of UDP, which means it
-outsources the problem of reliably transmitting request and reply
-messages of arbitrary size. Second, gRPC actually runs on top of a
-secured version of TCP called *Transport Layer Security* (TLS)—a thin
-layer that sits above TCP in the protocol stack—which means it
-outsources responsibility for securing the communication channel so
-adversaries can't eavesdrop or hijack the message exchange. Third,
-gRPC actually, actually runs on top of HTTP/2 (which is itself layered
-on top of TCP and TLS), meaning gRPC outsources two other
-problems to another protocol: (1) efficiently encoding/compressing
-binary data into a message, (2) multiplexing multiple remote procedure
-calls on a single TCP connection. In other words, gRPC encodes the
-identifier for the remote method as a URI, the request paremeters to
-the remote method as content in the HTTP message, and the return value
-from the remote method in ther HTTP response. The full gRPC stack is
-depicted in [Figure 10](#grpc-stack). 
+outsources the problems of connection management and reliably
+transmitting request and reply messages of arbitrary size. Second,
+gRPC actually runs on top of a secured version of TCP called
+*Transport Layer Security* (TLS)—a thin layer that sits above TCP in
+the protocol stack—which means it outsources responsibility for
+securing the communication channel so adversaries can't eavesdrop or
+hijack the message exchange. Third, gRPC actually, actually runs on
+top of HTTP/2 (which is itself layered on top of TCP and TLS), meaning
+gRPC outsources yet two other problems: (1) efficiently
+encoding/compressing binary data into a message, (2) multiplexing
+multiple remote procedure calls onto a single TCP connection. In other
+words, gRPC encodes the identifier for the remote method as a URI, the
+request paremeters to the remote method as content in the HTTP
+message, and the return value from the remote method in ther HTTP
+response. The full gRPC stack is depicted in [Figure 10](#grpc-stack),
+which also includes the language-specific elements. (One strength of
+gRPC is the wide set of programming languages it supports, with only a
+small subset shown in [Figure 10](#grpc-stack).)
+
 
 <figure class="line">
 	<a id="grpc-stack"></a>
@@ -688,8 +695,8 @@ humans to wrap their heads around complex systems, but what we're
 really trying to do is solve a set of problem (e.g., reliably transfer
 messages of arbitrary size, idenfity senders and receipients, match
 requests messages with reply messages, and so on) and the way these
-solutions get bundled into protocols, and then those protocols layered
-on top of each other, is the consequence of incremental improvement over
+solutions get bundled into protocols, and those protocols then layered
+on top of each other, is the consequence of incremental changes over
 time. You could argue it's an historical accident. Had the Internet
 started with an RPC mechanism as ubiquitous as TCP, HTTP might have
 been implemented on top of it (as might have almost all of the other
@@ -700,9 +707,9 @@ happened instead is that the web became the Internet's killer app, which
 meant that its application protocol (HTTP) became universally
 supported by the rest of the Internet's infrastructure: Firewalls,
 Load Balancers, Encryption, Authentication, Compression, and so on.
-All of these network elements have been designed to work well with
-HTTP, so as a consequence, HTTP has effectively become the Internet's
-universal RPC transport protocol.
+Because all of these network elements have been designed to work well
+with HTTP, HTTP has effectively become the Internet's universal RPC-based
+transport protocol.
 
 Returning to the unique characteristics of gRPC, the biggest value it
 brings to the table is to incorporate *streaming* into the RPC
@@ -728,17 +735,17 @@ patterns:
 
 This extra freedom in how the client and server interact means the
 gRPC transport protocol needs to send additional metadata and control
-messages—in addition to request and reply messages—between the two
-peers. Examples include `Error` and `Status` codes (to indicate success
-or why something failed), `Timeouts` (to indicate how long a client is
-willing to wait for a response), `PING` (a keep-alive notice to
-indicate that one side or the other is still running), `EOS`
-(end-of-stream notice to indicate that no more requests or responses),
-and `GOAWAY` (a notice from servers to clients to indicate that they
-will no longer accept any new streams). Unlike many other protocols in this
-book, where we are able to show the protocol's header format, the way this
-out-of-band information gets passed between the two sides is largely
-dictated by the underlying transport protocol, in this case
+messages—in addition to the actual request and reply messages—between
+the two peers. Examples include `Error` and `Status` codes (to
+indicate success or why something failed), `Timeouts` (to indicate how
+long a client is willing to wait for a response), `PING` (a keep-alive
+notice to indicate that one side or the other is still running), `EOS`
+(end-of-stream notice to indicate that there are no more requests or
+responses), and `GOAWAY` (a notice from servers to clients to indicate
+that they will no longer accept any new streams). Unlike many other
+protocols in this book, where we show the protocol's header format,
+the way this control information gets passed between the two sides is
+largely dictated by the underlying transport protocol, in this case
 HTTP/2. For example, as we'll see in Chapter 9, HTTP already includes
 a set of header fields and reply codes that gRPC takes advantage of.
 
@@ -777,15 +784,17 @@ trace-proto-bin = jher831yy13JHy3hc
 ```
 
 In this example, `HEADERS` and `DATA` are two standard HTTP control
-messages; each line following `HEADERS` (but before `DATA`) is an
-`attribute = value` pair that makes up the header (think of each line
-as a header field); those pairs that start with colon (e.g., `:status
-= 200`) are part of the HTTP standard (e.g., status `200` indicates
-success); and those pairs that do not start with a colon are
-gRPC-specific customizations (e.g., `grpc-encoding = gzip` indicates
-that the data in the message that follows has been compressed using
-`gzip`, and `grpc-timeout = 1S` indicates that the client has set a
-one second timeout).
+messages, which effectively deliniate between "the message's header"
+and "the message's payload." Specifically, each line following
+`HEADERS` (but before `DATA`) is an `attribute = value` pair that
+makes up the header (think of each line as analogous to a header
+field); those pairs that start with colon (e.g., `:status = 200`) are
+part of the HTTP standard (e.g., status `200` indicates success); and
+those pairs that do not start with a colon are gRPC-specific
+customizations (e.g., `grpc-encoding = gzip` indicates that the data
+in the message that follows has been compressed using `gzip`, and
+`grpc-timeout = 1S` indicates that the client has set a one second
+timeout).
 
 There is one final piece to explain. The header line
 
@@ -795,8 +804,8 @@ content-type = application/grpc+proto
 
 indicates that the message body (as demarked by the `DATA` line) is
 meaningful only to the application program (i.e., the server method)
-that this client is trying to request service from. More specifically,
-the `+proto` phrase specifies that the recipient will be able to
+that this client is requesting service from. More specifically,
+the `+proto` string specifies that the recipient will be able to
 interpret the bits in the message according to a *Protocol Buffer*
 (abbreviated `proto`) interface specification. Protocol Buffers are
 gRPC's way of specifiying how the parameters being passed to
@@ -807,8 +816,8 @@ a topic we'll take up in Chapter 7.
 
 The bottom line is that complex mechanisms like RPC, once packaged as
 a monolthic bundle of software (as with SunRPC and DCE-RPC), is nowdays
-being built by assembling an assortment of smaller pieces, each of
-which does solves a narrow problem. gRPC is both an example of that
+built by assembling an assortment of smaller pieces, each of
+which solves a narrow problem. gRPC is both an example of that
 approach, and a tool that enables further adoption of the approach. 
 The micro-services architecture mentioned earlier in this subsection
 applies the "built from small parts" strategy to entire cloud
