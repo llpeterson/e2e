@@ -70,8 +70,8 @@ Protocol (TCP), respectively, to illustrate how these services are
 provided in practice. In the case of a request/reply service, we discuss
 the role it plays in a Remote Procedure Call (RPC) service and what
 features that entails. The Internet does not have a single RPC
-protocol, so we cap this discussion off with a description of two
-widely used RPC protocols: SunRPC and DCE-RPC.
+protocol, so we cap this discussion off with a description of three
+widely used RPC protocols: SunRPC, DCE-RPC, and gRPC.
 
 Finally, real-time applications make particular demands on the transport
 protocol, such as the need to carry timing information that allows audio

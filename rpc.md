@@ -1,9 +1,9 @@
 # {{ page.title }}
 
 A common pattern of communication used by application programs
-structured according to the *client/server* paradigm is the
-request/reply message transaction: A client sends a request message to a
-server, and the server responds with a reply message, with the client blocking
+structured as a *client/server* pair is the request/reply message
+transaction: A client sends a request message to a server, and the
+server responds with a reply message, with the client blocking
 (suspending execution) to wait for the reply. [Figure 1](#rpc-timeline)
 illustrates the basic interaction between the client and server in such
 an exchange.
@@ -22,12 +22,10 @@ responses. It may also need to overcome some or all of the limitations
 of the underlying network outlined in the problem statement at the
 beginning of this chapter. While TCP overcomes these limitations by
 providing a reliable byte-stream service, it doesn't perfectly match the
-request/reply paradigm either—going to the trouble to
-establish a TCP connection just to exchange a pair of messages is
-overkill in some cases. This section describes a third category of transport
-protocol, called *Remote Procedure Call* (RPC), that more closely
-matches the needs of an application involved in a request/reply message
-exchange.
+request/reply paradigm either. This section describes a third category
+of transport protocol, called *Remote Procedure Call* (RPC), that more
+closely matches the needs of an application involved in a
+request/reply message exchange.
 
 ## RPC Fundamentals
 
@@ -56,13 +54,13 @@ Thus, a complete RPC mechanism actually involves two major components:
 
 1. A protocol that manages the messages sent between the client and the
     server processes and that deals with the potentially undesirable
-    properties of the underlying network
+    properties of the underlying network.
 
 2. Programming language and compiler support to package the arguments
     into a request message on the client machine and then to translate
     this message back into the arguments on the server machine, and
     likewise with the return value (this piece of the RPC mechanism is
-    usually called a *stub compiler*)
+    usually called a *stub compiler*).
 
 [Figure 2](#rpc-stub) schematically depicts what happens when a client
 invokes a remote procedure. First, the client calls a local stub for the
@@ -70,14 +68,13 @@ procedure, passing it the arguments required by the procedure. This stub
 hides the fact that the procedure is remote by translating the arguments
 into a request message and then invoking an RPC protocol to send the
 request message to the server machine. At the server, the RPC protocol
-delivers the request message to the server stub (sometimes called a
-*skeleton*), which translates it into the arguments to the procedure and
-then calls the local procedure. After the server procedure completes, it
-returns the answer to the server stub, which packages this return value
-in a reply message that it hands off to the RPC protocol for
-transmission back to the client. The RPC protocol on the client passes
-this message up to the client stub, which translates it into a return
-value that it returns to the client program.
+delivers the request message to the server stub, which translates it
+into the arguments to the procedure and then calls the local
+procedure. After the server procedure completes, it returns in a reply
+message that it hands off to the RPC protocol for transmission back to
+the client. The RPC protocol on the client passes this message up to
+the client stub, which translates it into a return value that it
+returns to the client program.
 
 <figure class="line">
 	<a id="rpc-stub"></a>
@@ -89,7 +86,12 @@ This section considers just the protocol-related aspects of an RPC
 mechanism. That is, it ignores the stubs and focuses instead on the RPC
 protocol, sometimes referred to as a request/reply protocol, that
 transmits messages between client and server. The transformation of
-arguments into messages and *vice versa* is covered elsewhere.
+arguments into messages and *vice versa* is covered elsewhere. It is
+also important to keep in mind that the client and server programs are
+written in some programming language, meaning that a given RPC
+mechanism might support Python stubs, Java stubs, GoLang stubs, and so
+on, each of which includes language-specific idioms for how procedures
+are invoked.
 
 The term *RPC* refers to a type of protocol rather than a specific
 standard like TCP, so specific RPC protocols vary in the functions they
@@ -345,12 +347,6 @@ in the RPC solution space, but least you think they are the only options,
 we describe three other RPC-like mechanisms (WSDL, SOAP, an REST) in
 the context of web services in Chapter 9.
 
-<figure class="line">
-	<a id="sunrpc"></a>
-	<img src="figures/f05-17-9780123850591.png" width="100px"/>
-	<figcaption>Protocol graph for SunRPC on top of UDP.</figcaption>
-</figure>
-
 ### SunRPC
 
 SunRPC became a *de facto* standard thanks to its wide distribution with
@@ -367,6 +363,12 @@ transport protocol since it appears "above" the transport layer.
 Pragmatically, the design decision to run RPC over an existing transport
 layer makes quite a lot of sense, as will be apparent in the following
 discussion.
+
+<figure class="line">
+	<a id="sunrpc"></a>
+	<img src="figures/f05-17-9780123850591.png" width="100px"/>
+	<figcaption>Protocol graph for SunRPC on top of UDP.</figcaption>
+</figure>
 
 SunRPC uses two-tier identifiers to identify remote procedures: a 32-bit
 program number and a 32-bit procedure number. (There is also a 32-bit
@@ -602,8 +604,9 @@ biggest is that gRPC is designed for cloud services rather than the
 simpler client/server paradigm that preceeded it. The difference
 is essentially an extra level of indirection. In the client/server
 world, the client invokes a method on a specific server process
-running on a specific server. One server process is presumed to be
-enough to serve calls from all the client processes that might call it.
+running on a specific server machine. One server process is presumed
+to be enough to serve calls from all the client processes that might
+call it.
 
 With cloud services, the client invokes a method on a *service*, which
 in order to support calls from arbitrarily many clients at the same
@@ -611,7 +614,7 @@ time, is implemented by a scalable number of server processes, each
 potentially running on a different server machine. This is where the
 cloud comes into play: datacenters make a seemingly infinite number of
 server machines available to scale up cloud services. When we use the
-term "scalable," what we mean is that the number of identical
+term "scalable" we mean that the number of identical
 server processes you elect to create depends on the workload (i.e.,
 the number of clients that want service at any given time) and that
 number can be adjusted dynamically over time. One other detail is that
@@ -634,7 +637,7 @@ balancer* directs that invocation to one of the many available server
 processes (containers) that implement that service, as shown in
 [Figure 9](#rpc-service). The load balancer in can be implemented in
 different ways, including a hardware device, but it is typically
-implemented by a proxy server process that runs in a virtual machine
+implemented by a proxy process that runs in a virtual machine
 (also hosted in the cloud) rather than as a physical appliance.
 
 There is a set of best practices for implementing the actual server
@@ -649,7 +652,7 @@ the scope of this book.
 What we are interested in here is transport protocol at the core of
 gRPC. Here again, there is a major departure from the two previous
 example protocols, not in terms of fundamental problems that need to
-be addressed, but more in terms of gRPC's approach to addressing them.
+be addressed, but in terms of gRPC's approach to addressing them.
 In short, gRPC "outsources" many of the problems to other protocols,
 leaving gRPC to essentially package those capabilities in an
 easy-to-use form. Let's look at the details.
@@ -708,8 +711,8 @@ meant that its application protocol (HTTP) became universally
 supported by the rest of the Internet's infrastructure: Firewalls,
 Load Balancers, Encryption, Authentication, Compression, and so on.
 Because all of these network elements have been designed to work well
-with HTTP, HTTP has effectively become the Internet's universal RPC-based
-transport protocol.
+with HTTP, HTTP has effectively become the Internet's universal
+request/reply transport protocol.
 
 Returning to the unique characteristics of gRPC, the biggest value it
 brings to the table is to incorporate *streaming* into the RPC
