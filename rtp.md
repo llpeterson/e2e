@@ -16,13 +16,14 @@ by the protocols discussed so far in this chapter.
 <figure class="line">
 	<a id="vat"></a>
 	<img src="figures/f05-21-9780123850591.png" width="400px"/>
-	<figcaption>User interface of a vat audioconference.</figcaption>
+	<figcaption>User interface of vat, an early Internet
+	audioconferencing tool.</figcaption>
 </figure>
 
 Multimedia applications—those that involve video, audio, and
 data—are sometimes divided into two classes: *interactive*
 applications and *streaming* applications. An early and at one time
-popular example of the interactive class is `vat`, a multiparty
+popular example of the interactive class was `vat`, a multiparty
 audioconferencing tool that is often used over networks supporting IP
 multicast. The control panel for a typical `vat` conference is shown
 in [Figure 1](#vat). VoIP is also a class of interactive application
@@ -33,11 +34,8 @@ with the most stringent real-time requirements.
 
 > Even though it's been overtaken by a plethora of commercial
 > products, we use `vat` as a running example in this section
-> precisely because it is not a commercial product, and so is easy
-> for us to describe. The principles remain the same, which makes
-> sense when you consider that `vat` was the application that
-> introduced interactive real-time functionality into the Internet in
-> the first place.
+> because it was the application that introduced interactive real-time
+> functionality into the Internet in the first place.
 
 Streaming applications typically deliver audio or video streams from a
 server to a client and are typified by such commercial products as
