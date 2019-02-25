@@ -549,5 +549,5 @@ application designers. Because there is an infinite number of possible
 applications, the challenge in designing a transport protocol is to make
 it general enough to meet the widely varying needs of many different
 applications without making the protocol itself impossible to implement.
-RTP has proven very successful in this regard, forming the basis for the
-majority of real-time multimedia communications over the Internet today.
+RTP has proven very successful in this regard, forming the basis for many
+real-time multimedia applications run over the Internet today.
