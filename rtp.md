@@ -35,7 +35,7 @@ with the most stringent real-time requirements.
 > products, we use `vat` as a running example in this section
 > precisely because it is not a commercial product, and so is easy
 > for us to describe. The principles remain the same, which makes
-> since when you consider that `vat` was the application that
+> sense when you consider that `vat` was the application that
 > introduced interactive real-time functionality into the Internet in
 > the first place.
 
