@@ -23,18 +23,21 @@ adoption, but not a sufficient foundation for all the applications
 people wanted to build.
 
 We’re yet to see some of these solutions—future chapters will describe
-how the Internet manages congestion (Chapter 6), provides security
-(Chapter 8), and supports real-time multimedia applications (Chapters
-7 and 9)—but it is informative to take this opportunity to reconcile
-the value of a universal narrow waist with the evolution that
-inevitably happens in any long-lived system: the “fixed point” around
-which the rest of the architecture evolves has moved to a new spot in
-the software stack. In short, HTTP has become the new narrow waist;
-the one shared/assumed piece of the global infrastructure that makes
-everything else possible. This didn’t happen overnight or by
-proclamation, although some did anticipate it would happen. The narrow
-waist drifted slowly up the protocol stack as a consequence of an
-evolution (to mix geoscience and biological metaphors).
+how the Internet manages congestion
+([Chapter 6](../congestion/problem.md)), provides security
+([Chapter 8](../security/problem.md)), and supports real-time
+multimedia applications ([Chapters 7](../data/problem.md) and
+[9](../applications/problem.md))—but it is informative to take this
+opportunity to reconcile the value of a universal narrow waist with
+the evolution that inevitably happens in any long-lived system: the
+“fixed point” around which the rest of the architecture evolves has
+moved to a new spot in the software stack. In short, HTTP has become
+the new narrow waist; the one shared/assumed piece of the global
+infrastructure that makes everything else possible. This didn’t happen
+overnight or by proclamation, although some did anticipate it would
+happen. The narrow waist drifted slowly up the protocol stack as a
+consequence of an evolution (to mix geoscience and biological
+metaphors).
 
 <figure class="line">
 	<a id="waist"></a>
@@ -72,10 +75,21 @@ to a new location. Similarly, HTTP enables injecting *caching proxies*
 between the client and server, making it possible to replicate popular
 content in multiple locations and save clients the delay of going all
 the way across the Internet to retrieve some piece of information.
-(Both of these capabilities are discussed in Section 9.1.) Finally,
-HTTP has been used to deliver real-time multimedia, in an approach
-known as *adaptive streaming*. (See how in Section 7.2.)
+(Both of these capabilities are discussed in
+[Section 9.1](../applications/traditional.md).) Finally, HTTP has been
+used to deliver real-time multimedia, in an approach known as
+*adaptive streaming*. (See how in [Section 7.2](../data/multimedia).)
 
 > [!NOTE|label:Broader Perspective]
-> To continue learning about the cloudification of the Internet, see
-> [Software Defined Traffic Engineering](../congestion/trend.md)
+> To continue reading about the cloudification of the Internet, see
+> [Software Defined Traffic Engineering](../congestion/trend.md).
+>
+> To brush up on the basics, see 
+> * IP: [Section 3.2](../internetworking/basic-ip.md). 
+> * TCP: [Section 5.2](tcp.md).
+> * TLS: [Section 8.5](../security/systems.md).
+> * HTTP: [Section 9.1](../applications/traditional.md).
+> * Adaptive Streaming: [Section 7.2](../data/multimedia.md).
+>
+> To learn more about the centrality of HTTP, we recommend:
+> * [HTTP: An Evolvable Narrow Waist for the Future Internet](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2012/EECS-2012-5.pdf), January 2012.
