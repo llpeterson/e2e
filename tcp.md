@@ -157,18 +157,19 @@ vulnerability, it is still necessary to provide true end-to-end checks
 to guarantee reliable/ordered service, even though the lower levels of
 the system also implement that functionality.
 
-This discussion serves to illustrate one of the most important
-principles in system design—the *end-to-end argument*. In a nutshell,
-the end-to-end argument says that a function (in our example, providing
-reliable/ordered delivery) should not be provided in the lower levels of
-the system unless it can be completely and correctly implemented at that
-level. Therefore, this rule argues in favor of the TCP/IP approach. This
-rule is not absolute, however. It does allow for functions to be
-incompletely provided at a low level as a performance optimization. This
-is why it is perfectly consistent with the end-to-end argument to
-perform error detection (e.g., CRC) on a hop-by-hop basis; detecting and
-retransmitting a single corrupt packet across one hop is preferable to
-having to retransmit an entire file end-to-end.
+> [!Note|style:flat|label:Key Takeaway|iconVisibility:hidden]
+> This discussion serves to illustrate one of the most important
+> principles in system design—the *end-to-end argument*. In a nutshell,
+> the end-to-end argument says that a function (in our example, providing
+> reliable/ordered delivery) should not be provided in the lower levels of
+> the system unless it can be completely and correctly implemented at that
+> level. Therefore, this rule argues in favor of the TCP/IP approach. This
+> rule is not absolute, however. It does allow for functions to be
+> incompletely provided at a low level as a performance optimization. This
+> is why it is perfectly consistent with the end-to-end argument to
+> perform error detection (e.g., CRC) on a hop-by-hop basis; detecting and
+> retransmitting a single corrupt packet across one hop is preferable to
+> having to retransmit an entire file end-to-end.
 
 ## Segment Format
 
@@ -682,14 +683,15 @@ probably not be accepted, but it tries anyway, because each of these
 window. Eventually, one of these 1-byte probes triggers a response that
 reports a nonzero advertised window.
 
-Note that the reason the sending side periodically sends this probe
-segment is that TCP is designed to make the receive side as simple as
-possible—it simply responds to segments from the sender, and it never
-initiates any activity on its own. This is an example of a
-well-recognized (although not universally applied) protocol design rule,
-which, for lack of a better name, we call the *smart sender/ dumb
-receiver* rule. Recall that we saw another example of this rule when we
-discussed the use of NAKs in sliding window algorithm.
+> [!Note|style:flat|label:Key Takeaway|iconVisibility:hidden]
+> Note that the reason the sending side periodically sends this probe
+> segment is that TCP is designed to make the receive side as simple as
+> possible—it simply responds to segments from the sender, and it never
+> initiates any activity on its own. This is an example of a
+> well-recognized (although not universally applied) protocol design rule,
+> which, for lack of a better name, we call the *smart sender/ dumb
+> receiver* rule. Recall that we saw another example of this rule when we
+> discussed the use of NAKs in sliding window algorithm.
 
 ### Protecting against Wraparound
 
