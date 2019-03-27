@@ -78,7 +78,7 @@ the way across the Internet to retrieve some piece of information.
 (Both of these capabilities are discussed in
 [Section 9.1](../applications/traditional.md).) Finally, HTTP has been
 used to deliver real-time multimedia, in an approach known as
-*adaptive streaming*. (See how in [Section 7.2](../data/multimedia).)
+*adaptive streaming*. (See how in [Section 7.2](../data/multimedia.md).)
 
 > [!NOTE|label:Broader Perspective]
 > To continue reading about the cloudification of the Internet, see
