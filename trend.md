@@ -84,12 +84,5 @@ used to deliver real-time multimedia, in an approach known as
 > To continue reading about the cloudification of the Internet, see
 > [Software Defined Traffic Engineering](../congestion/trend.md).
 >
-> To brush up on the basics, see 
-> * IP: [Section 3.2](../internetworking/basic-ip.md). 
-> * TCP: [Section 5.2](tcp.md).
-> * TLS: [Section 8.5](../security/systems.md).
-> * HTTP: [Section 9.1](../applications/traditional.md).
-> * Adaptive Streaming: [Section 7.2](../data/multimedia.md).
->
 > To learn more about the centrality of HTTP, we recommend:
 > * [HTTP: An Evolvable Narrow Waist for the Future Internet](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2012/EECS-2012-5.pdf), January 2012.
