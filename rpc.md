@@ -8,7 +8,7 @@ server responds with a reply message, with the client blocking
 illustrates the basic interaction between the client and server in such
 an exchange.
 
-<figure class="line">
+<figure>
 	<a id="rpc-timeline"></a>
 	<img src="figures/f05-13-9780123850591.png" width="300px"/>
 	<figcaption>Timeline for RPC.</figcaption>
@@ -76,7 +76,7 @@ the client. The RPC protocol on the client passes this message up to
 the client stub, which translates it into a return value that it
 returns to the client program.
 
-<figure class="line">
+<figure>
 	<a id="rpc-stub"></a>
 	<img src="figures/f05-14-9780123850591.png" width="500px"/>
 	<figcaption>Complete RPC mechanism.</figcaption>
@@ -178,7 +178,7 @@ client sends a request message and the server acknowledges it. Then,
 after executing the procedure, the server sends a reply message and
 the client acknowledges the reply.
 
-<figure class="line">
+<figure>
 	<a id="chan-timeline1"></a>
 	<img src="figures/f05-15-9780123850591.png" width="200px"/>
 	<figcaption>Simple timeline for a reliable RPC protocol.</figcaption>
@@ -223,7 +223,7 @@ the preceding reply. Note that we saw a very similar approach—called
 *concurrent logical channels*—in an earlier section as a way to improve
 on the performance of a stop-and-wait reliability mechanism.
 
-<figure class="line">
+<figure>
 	<a id="implicitAckTimeline"></a>
 	<img src="figures/f05-16-9780123850591.png" width="200px"/>
 	<figcaption>Timeline for a reliable RPC protocol using implicit
@@ -364,7 +364,7 @@ Pragmatically, the design decision to run RPC over an existing transport
 layer makes quite a lot of sense, as will be apparent in the following
 discussion.
 
-<figure class="line">
+<figure>
 	<a id="sunrpc"></a>
 	<img src="figures/f05-17-9780123850591.png" width="100px"/>
 	<figcaption>Protocol graph for SunRPC on top of UDP.</figcaption>
@@ -387,7 +387,7 @@ number may be implemented on other machines in the same network. Thus,
 the address of the server's machine (e.g., an IP address) is an implicit
 third tier of the RPC address.
 
-<figure class="line">
+<figure>
 	<a id="sunrpc-format"></a>
 	<img src="figures/f05-18-9780123850591.png" width="400px"/>
 	<figcaption>SunRPC header formats: (a) request; (b) reply.</figcaption>
@@ -482,7 +482,7 @@ at-most-once is the default behavior.) There are some other differences
 between the two approaches, which we will highlight in the following
 paragraphs.
 
-<figure class="line">
+<figure>
 	<a id="dce"></a>
 	<img src="figures/f05-19-9780123850591.png" width="200px"/>
 	<figcaption>Typical DCE-RPC message exchange.</figcaption>
@@ -561,7 +561,7 @@ and sixth $(26=20+6)$ bits turned on. So as to support an (almost)
 arbitrarily long bit vector, the size of the vector (measured in 32-bit
 words) is given in the `SelAckLen` field.
 
-<figure class="line">
+<figure>
 	<a id="fack"></a>
 	<img src="figures/f05-20-9780123850591.png" width="500px"/>
 	<figcaption>Fragmentation with selective acknowledgments.</figcaption>
@@ -624,7 +624,7 @@ encapsulated inside an isolated environment that includes all the
 software packages the process needs to run. Docker is today's
 canonical example of a container platform.
 
-<figure class="line">
+<figure>
 	<a id="rpc-service"></a>
 	<img src="figures/rpc/Slide1.png" width="400px"/>
 	<figcaption>Using RPC to invoke a scalable cloud service.</figcaption>
@@ -678,7 +678,7 @@ gRPC is the wide set of programming languages it supports, with only a
 small subset shown in [Figure 10](#grpc-stack).)
 
 
-<figure class="line">
+<figure>
 	<a id="grpc-stack"></a>
 	<img src="figures/rpc/Slide2.png" width="400px"/>
 	<figcaption>gRPC core stacked on top of HTTP, TLS, and TCP and

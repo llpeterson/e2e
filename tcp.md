@@ -187,7 +187,7 @@ simplicity, shows data flowing in only one direction. Remember that, in
 general, a single TCP connection supports byte streams flowing in both
 directions.
 
-<figure class="line">
+<figure>
 	<a id="tcp-stream"></a>
 	<img src="figures/f05-03-9780123850591.png" width="500px"/>
 	<figcaption>How TCP manages a byte stream.</figcaption>
@@ -200,7 +200,7 @@ Each TCP segment contains the header schematically depicted in
 become apparent throughout this section. For now, we simply introduce
 them.
 
-<figure class="line">
+<figure>
 	<a id="tcp-format"></a>
 	<img src="figures/f05-04-9780123850591.png" width="400px"/>
 	<figcaption>TCP header format.</figcaption>
@@ -235,7 +235,7 @@ that has a particular `SequenceNum` flowing in one direction and
 opposite direction, as illustrated in [Figure 3](#tcp-flow). The use of
 these three fields is described more fully later in this chapter.
 
-<figure class="line">
+<figure>
 	<a id="tcp-flow"></a>
 	<img src="figures/f05-05-9780123850591.png" width="500px"/>
 	<figcaption>Simplified illustration (showing only one direction)
@@ -305,7 +305,7 @@ and then show how it is used by TCP. The three-way handshake involves
 the exchange of three messages between the client and the server, as
 illustrated by the timeline given in [Figure 4](#twh-timeline).
 
-<figure class="line">
+<figure>
 	<a id="twh-timeline"></a>
 	<img src="figures/f05-06-9780123850591.png" width="400px"/>
 	<figcaption>Timeline for three-way handshake algorithm.</figcaption>
@@ -353,7 +353,7 @@ below ESTABLISHED). Everything that goes on while a connection is
 open—that is, the operation of the sliding window algorithm—is
 hidden in the ESTABLISHED state.
 
-<figure class="line">
+<figure>
 	<a id="tcp-std"></a>
 	<img src="figures/f05-07-9780123850591.png" width="600px"/>
 	<figcaption>TCP state-transition diagram.</figcaption>
@@ -499,7 +499,7 @@ order, as well as data that is in the correct order (i.e., there are no
 missing bytes earlier in the stream) but that the application process
 has not yet had the chance to read.
 
-<figure class="line">
+<figure>
 	<a id="tcp-fc"></a>
 	<img src="figures/f05-08-9780123850591.png" width="500px"/>
 	<figcaption>Relationship between TCP send buffer (a) and receive
@@ -733,8 +733,9 @@ networks with various bandwidths.
 | OC-192 (10 Gbps)  | 3 seconds |
 | 10GigE (10 Gbps)  | 3 seconds |
 
-{% center %} *Table 1. Time Until 32-Bit Sequence Number Space Wraps 
-Around.*  {% endcenter %}
+<table>
+<caption>Table 1. Time Until 32-Bit Sequence Number Space Wraps Around.</caption>
+</table>
 
 As you can see, the 32-bit sequence number space is adequate at modest
 bandwidths, but given that OC-192 links are now common in the Internet
@@ -776,7 +777,9 @@ technologies.
 | OC-192 (10 Gbps)  | 118.4 MB |
 | 10GigE (10 Gbps)  | 118.4 MB |
 
-{% center %} *Table 2. Required Window Size for 100-ms RTT.* {% endcenter %}
+<table>
+<caption>Table 2. Required Window Size for 100-ms RTT.</caption>
+</table>
 
 As you can see, TCP's `AdvertisedWindow` field is in even worse shape
 than its `SequenceNum` field—it is not big enough to handle even a
@@ -847,7 +850,7 @@ adjacent containers to create larger containers, as in
 early implementations of TCP regularly found themselves filling the
 network with tiny segments.
 
-<figure class="line">
+<figure>
 	<a id="sillywindow"></a>
 	<img src="figures/f05-09-9780123850591.png" width="500px"/>
 	<figcaption>Silly window syndrome. (a) As long as the sender sends
@@ -978,7 +981,7 @@ for the second, then the `SampleRTT` is too large (a); if you assume
 that the ACK is for the second transmission but it was actually for the
 first, then the `SampleRTT` is too small (b).
 
-<figure class="line">
+<figure>
 	<a id="tcp-karn"></a>
 	<img src="figures/f05-10-9780123850591.png" width="500px"/>
 	<figcaption>Associating the ACK with (a) original transmission
@@ -1267,7 +1270,7 @@ protocols, we can discuss how to meaningfully measure its performance.
 The importance of such measurements is that they represent the
 performance seen by application programs.
 
-<figure class="line">
+<figure>
 	<a id="experiment"></a>
 	<img src="figures/f05-11-9780123850591.png" width="500px"/>
 	<figcaption>Measured system: Two Linux workstations and a pair of
@@ -1302,7 +1305,7 @@ throughput curve flattens off above 1 KB, at which point the per-message
 overhead becomes insignificant when compared to the large number of
 bytes that the protocol stack has to process.
 
-<figure class="line">
+<figure>
 	<a id="xput"></a>
 	<img src="figures/f05-12-9780123850591.png" width="400px"/>
 	<figcaption>Measured throughput using TCP, for various message

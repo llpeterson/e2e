@@ -39,7 +39,7 @@ happen. The narrow waist drifted slowly up the protocol stack as a
 consequence of an evolution (to mix geoscience and biological
 metaphors).
 
-<figure class="line">
+<figure>
 	<a id="waist"></a>
 	<img src="figures/rpc/Slide3.png" width="500px"/>
 	<figcaption>HTTP (plus TLS, TCP, and IP) forming the narrow

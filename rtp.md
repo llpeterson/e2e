@@ -13,7 +13,7 @@ to get a response. As we will see shortly, real-time applications place
 some specific demands on the transport protocol that are not well met
 by the protocols discussed so far in this chapter.
 
-<figure class="line">
+<figure>
 	<a id="vat"></a>
 	<img src="figures/f05-21-9780123850591.png" width="400px"/>
 	<figcaption>User interface of vat, an early Internet
@@ -75,7 +75,7 @@ port numbers happens to be just what RTP needs as a starting point. So,
 rather than recreate port numbers in RTP, RTP outsources the
 demultiplexing function to UDP.
 
-<figure class="line">
+<figure>
 	<a id="vat-stack"></a>
 	<img src="figures/f05-22-9780123850591.png" width="300px"/>
 	<figcaption>Protocol stack for multimedia applications using RTP.</figcaption>
@@ -241,7 +241,7 @@ applications, since anything that is very specific to a single
 application would be more efficiently carried in the RTP payload for
 that application only.
 
-<figure class="line">
+<figure>
 	<a id="rtp-hdr"></a>
 	<img src="figures/f05-23-9780123850591.png" width="500px"/>
 	<figcaption>RTP header format.</figcaption>
@@ -272,7 +272,7 @@ padding removes any need for a length field in the RTP header (thus
 serving the goal of keeping the header short); in the common case of no
 padding, the length is deduced from the lower-layer protocol.
 
-<figure class="line">
+<figure>
 	<a id="rtp-pad"></a>
 	<img src="figures/f05-24-9780123850591.png" width="600px"/>
 	<figcaption>Padding of an RTP packet.</figcaption>

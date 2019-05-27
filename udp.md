@@ -53,7 +53,7 @@ for communication: The client and server use the well-known port to
 agree on some other port that they will use for subsequent
 communication, leaving the well-known port free for other clients.
 
-<figure class="line">
+<figure>
 	<a id="udp-format"></a>
 	<img src="figures/f05-01-9780123850591.png" width="400px"/>
 	<figcaption>Format for UDP header.</figcaption>
@@ -80,7 +80,7 @@ application process wants to receive a message, one is removed from the
 front of the queue. If the queue is empty, the process blocks until a
 message becomes available.
 
-<figure class="line">
+<figure>
 	<a id="udp-queue"></a>
 	<img src="figures/f05-02-9780123850591.png" width="400px"/>
 	<figcaption>UDP message queue.</figcaption>
