@@ -720,7 +720,10 @@ if we are doing our job of keeping the pipe full.) [Table 1](#eqnum)
 shows how long it takes for the sequence number to wrap around on
 networks with various bandwidths.
 
+<table>
 <a id="seqnum"></a>
+<tabcaption>Time Until 32-Bit Sequence Number Space Wraps Around.</tabcaption>
+</table>
 
 | Bandwidth | Time until Wraparound |
 |:--------:|:------------------:|
@@ -732,10 +735,6 @@ networks with various bandwidths.
 | OC-48 (2.5 Gbps)  | 14 seconds |
 | OC-192 (10 Gbps)  | 3 seconds |
 | 10GigE (10 Gbps)  | 3 seconds |
-
-<table>
-<caption>Table 1. Time Until 32-Bit Sequence Number Space Wraps Around.</caption>
-</table>
 
 As you can see, the 32-bit sequence number space is adequate at modest
 bandwidths, but given that OC-192 links are now common in the Internet
@@ -764,7 +763,10 @@ a cross-country connection in the United States), [Table 2](#adv-win)
 gives the delay $$\times$$ bandwidth product for several network
 technologies.
 
+<table>
 <a id="adv-win"></a>
+<tabcaption>Required Window Size for 100-ms RTT.</tabcaption>
+</table>
 
 | Bandwidth | Delay $$\times$$ Bandwidth Product |
 |:--------:|:------------------:|
@@ -776,10 +778,6 @@ technologies.
 | OC-48 (2.5 Gbps)    | 29.6 MB |
 | OC-192 (10 Gbps)  | 118.4 MB |
 | 10GigE (10 Gbps)  | 118.4 MB |
-
-<table>
-<caption>Table 2. Required Window Size for 100-ms RTT.</caption>
-</table>
 
 As you can see, TCP's `AdvertisedWindow` field is in even worse shape
 than its `SequenceNum` field—it is not big enough to handle even a
