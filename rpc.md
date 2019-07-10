@@ -344,7 +344,7 @@ to implement cloud services in their datacenters.
 
 These three examples represent interesting alternative design choices
 in the RPC solution space, but least you think they are the only options,
-we describe three other RPC-like mechanisms (WSDL, SOAP, an REST) in
+we describe three other RPC-like mechanisms (WSDL, SOAP, and REST) in
 the context of web services in Chapter 9.
 
 ### SunRPC
@@ -598,10 +598,10 @@ are wild and crazy people. Nonetheless, gRPC is popular because it
 makes available to everyone—as open source—a decade's worth of
 experience within Google using RPC to build scalable cloud services.
 
-Before getting into the details, there some major differences
+Before getting into the details, there are some major differences
 between gRPC and the other two examples we've just covered. The
 biggest is that gRPC is designed for cloud services rather than the
-simpler client/server paradigm that preceeded it. The difference
+simpler client/server paradigm that preceded it. The difference
 is essentially an extra level of indirection. In the client/server
 world, the client invokes a method on a specific server process
 running on a specific server machine. One server process is presumed
@@ -635,7 +635,7 @@ indirection layered on top of a server, all this means is that
 the caller identifies the service it wants to invoke, and a *load
 balancer* directs that invocation to one of the many available server
 processes (containers) that implement that service, as shown in
-[Figure 9](#rpc-service). The load balancer in can be implemented in
+[Figure 9](#rpc-service). The load balancer can be implemented in
 different ways, including a hardware device, but it is typically
 implemented by a proxy process that runs in a virtual machine
 (also hosted in the cloud) rather than as a physical appliance.
@@ -670,8 +670,8 @@ gRPC outsources yet two other problems: (1) efficiently
 encoding/compressing binary data into a message, (2) multiplexing
 multiple remote procedure calls onto a single TCP connection. In other
 words, gRPC encodes the identifier for the remote method as a URI, the
-request paremeters to the remote method as content in the HTTP
-message, and the return value from the remote method in ther HTTP
+request parameters to the remote method as content in the HTTP
+message, and the return value from the remote method in the HTTP
 response. The full gRPC stack is depicted in [Figure 10](#grpc-stack),
 which also includes the language-specific elements. (One strength of
 gRPC is the wide set of programming languages it supports, with only a
@@ -696,7 +696,7 @@ of HTTP rather than the other way around.
 The short explanation is that layering provides a convenient way for
 humans to wrap their heads around complex systems, but what we're
 really trying to do is solve a set of problem (e.g., reliably transfer
-messages of arbitrary size, idenfity senders and receipients, match
+messages of arbitrary size, identify senders and recipients, match
 requests messages with reply messages, and so on) and the way these
 solutions get bundled into protocols, and those protocols then layered
 on top of each other, is the consequence of incremental changes over
@@ -719,7 +719,7 @@ brings to the table is to incorporate *streaming* into the RPC
 mechanism, which is to say, gRPC supports four different request/reply
 patterns:
 
-1. Simple RPC: The cient sends a single request message and the server
+1. Simple RPC: The client sends a single request message and the server
     responds with a single reply message.
 
 2. Server Streaming RPC: The client sends a single request message and 
@@ -732,7 +732,7 @@ patterns:
     client’s requests.
 
 4. Bidirectional Streaming RPC: The call is initiated by the client,
-    but after that, the client and server can read and write requets
+    but after that, the client and server can read and write requests
     and responses in any order; the streams are completely
     independent.
 
@@ -787,7 +787,7 @@ trace-proto-bin = jher831yy13JHy3hc
 ```
 
 In this example, `HEADERS` and `DATA` are two standard HTTP control
-messages, which effectively deliniate between "the message's header"
+messages, which effectively delineate between "the message's header"
 and "the message's payload." Specifically, each line following
 `HEADERS` (but before `DATA`) is an `attribute = value` pair that
 makes up the header (think of each line as analogous to a header
@@ -805,13 +805,13 @@ There is one final piece to explain. The header line
 content-type = application/grpc+proto
 ```
 
-indicates that the message body (as demarked by the `DATA` line) is
+indicates that the message body (as demarcated by the `DATA` line) is
 meaningful only to the application program (i.e., the server method)
 that this client is requesting service from. More specifically,
 the `+proto` string specifies that the recipient will be able to
 interpret the bits in the message according to a *Protocol Buffer*
 (abbreviated `proto`) interface specification. Protocol Buffers are
-gRPC's way of specifiying how the parameters being passed to
+gRPC's way of specifying how the parameters being passed to
 the server are encoded into a message, which is in turn used to
 generate the stubs that sit between the underlying RPC mechanism and
 the actual functions being called (see [Figure 2](#rpc-stub)). This is
@@ -819,8 +819,8 @@ a topic we'll take up in Chapter 7.
 
 > [!Note|style:flat|label:Key Takeaway|iconVisibility:hidden]
 > The bottom line is that complex mechanisms like RPC, once packaged
-> as a monolthic bundle of software (as with SunRPC and DCE-RPC), is
-> nowdays built by assembling an assortment of smaller pieces, each of
+> as a monolithic bundle of software (as with SunRPC and DCE-RPC), is
+> nowadays built by assembling an assortment of smaller pieces, each of
 > which solves a narrow problem. gRPC is both an example of that
 > approach, and a tool that enables further adoption of the approach. 
 > The micro-services architecture mentioned earlier in this subsection

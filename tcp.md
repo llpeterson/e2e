@@ -830,7 +830,7 @@ window opens further.
 It turns out that the strategy of aggressively taking advantage of any
 available window leads to a situation now known as the *silly window
 syndrome*. [Figure 7](#sillywindow) helps visualize what happens.
-If you think of a TCP stream as a conveyer belt with "full" containers
+If you think of a TCP stream as a conveyor belt with "full" containers
 (data segments) going in one direction and empty containers (ACKs) going
 in the reverse direction, then `MSS`-sized segments correspond to
 large containers and 1-byte segments correspond to very small

@@ -7,7 +7,7 @@ processes running on any given host, so the protocol needs to add a
 level of demultiplexing, thereby allowing multiple application processes
 on each host to share the network. Aside from this requirement, the
 transport protocol adds no other functionality to the best-effort
-service provideaird by the underlying network. The Internet's User Datagram
+service provided by the underlying network. The Internet's User Datagram
 Protocol is an example of such a transport protocol.
 
 The only interesting issue in such a protocol is the form of the address
@@ -92,7 +92,7 @@ demultiplexing messages to some application process—it also ensures
 the correctness of the message by the use of a checksum. (The UDP
 checksum is optional in IPv4 but is mandatory in IPv6.) The basic UDP
 checksum algorithm is the same one used for IP—that is, it adds up a
-set of 16-bit words using ones complement arithmetic and takes the ones
+set of 16-bit words using ones' complement arithmetic and takes the ones'
 complement of the result. But the input data that is used for the
 checksum is a little counterintuitive.
 

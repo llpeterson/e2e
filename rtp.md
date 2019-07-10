@@ -84,7 +84,7 @@ demultiplexing function to UDP.
 ## Requirements
 
 The most basic requirement for a general-purpose multimedia protocol is
-that it allow similar applications to interoperate with each other. For
+that it allows similar applications to interoperate with each other. For
 example, it should be possible for two independently implemented
 audioconferencing applications to talk to each other. This immediately
 suggests that the applications had better use the same method of
@@ -391,7 +391,7 @@ functions:
     interface (e.g., the `vat` interface shown in [Figure 1](#vat))
 
 The first function may be useful for detecting and responding to
-congestion. Some applications are able to operate at difference rates
+congestion. Some applications are able to operate at different rates
 and may use performance data to decide to use a more aggressive
 compression scheme to reduce congestion, for example, or to send a
 higher-quality stream when there is little congestion. Performance
