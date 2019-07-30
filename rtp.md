@@ -210,7 +210,11 @@ Alternatively, the format of the data might be much more complex; an
 MPEG-encoded video stream, for example, would need to have a good deal
 of structure to represent all the different types of information.
 
+{% if output.name == "ebook" %}
+> **Key Takeaway**
+{% else %}
 > [!Note|style:flat|label:Key Takeaway|iconVisibility:hidden]
+{% endif %}
 > The design of RTP embodies an architectural principle known as
 > *Application Level Framing* (ALF). This principle was put forward by
 > Clark and Tennenhouse in 1990 as a new way to design protocols for

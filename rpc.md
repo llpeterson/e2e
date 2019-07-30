@@ -817,7 +817,11 @@ generate the stubs that sit between the underlying RPC mechanism and
 the actual functions being called (see [Figure 2](#rpc-stub)). This is
 a topic we'll take up in Chapter 7.
 
+{% if output.name == "ebook" %}
+> **Key Takeaway**
+{% else %}
 > [!Note|style:flat|label:Key Takeaway|iconVisibility:hidden]
+{% endif %}
 > The bottom line is that complex mechanisms like RPC, once packaged
 > as a monolithic bundle of software (as with SunRPC and DCE-RPC), is
 > nowadays built by assembling an assortment of smaller pieces, each of
