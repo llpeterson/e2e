@@ -5,9 +5,9 @@
 
 ## Problem: Getting Processes to Communicate
 
-Many technologies that can be used to connect together a collection of
+Many technologies can be used to connect together a collection of
 computers, ranging from simple Ethernets and wireless networks to
-global-scale internetworks. Once interconnect, the next problem is to
+global-scale internetworks. Once interconnected, the next problem is to
 turn this host-to-host packet delivery service into a
 process-to-process communication channel. This is the role played
 by the *transport* level of the network architecture, which, because it

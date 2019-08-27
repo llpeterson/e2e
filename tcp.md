@@ -131,7 +131,7 @@ Discussion of this topic is delayed until the next chapter.
 
 We conclude this discussion of end-to-end issues by comparing TCP's
 approach to providing a reliable/ordered delivery service with the
-approach used by virtual-circut-based networks like the historically
+approach used by virtual-circuit-based networks like the historically
 important X.25 network. In TCP, the underlying IP network is assumed
 to be unreliable and to deliver messages out of order; TCP uses the
 sliding window algorithm on an end-to-end basis to provide
