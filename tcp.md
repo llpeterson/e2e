@@ -687,6 +687,12 @@ probably not be accepted, but it tries anyway, because each of these
 window. Eventually, one of these 1-byte probes triggers a response that
 reports a nonzero advertised window.
 
+Note that these 1-byte messages are called *Zero Window Probes* and in
+practice they are sent every 5 to 60 seconds. As for what single byte
+of data to send in the probe: it's the next byte of actual data just
+outside the window. (It has to be real data in case it's accepted by
+the receiver.)
+
 {% if output.name == "ebook" %}
 > **Key Takeaway**
 {% else %}
@@ -736,7 +742,6 @@ networks with various bandwidths.
 | Bandwidth | Time until Wraparound |
 |:--------:|:------------------:|
 | T1 (1.5 Mbps) | 6.4 hours |
-| Ethernet (10 Mbps) | 57 minutes |
 | T3 (45 Mbps) | 13 minutes |
 | Fast Ethernet (100 Mbps) | 6 minutes |
 | OC-3 (155 Mbps) | 4 minutes |
@@ -779,7 +784,6 @@ technologies.
 | Bandwidth | Delay $$\times$$ Bandwidth Product |
 |:--------:|:------------------:|
 | T1 (1.5 Mbps)  | 18 KB |
-| Ethernet (10 Mbps)  | 122 KB |
 | T3 (45 Mbps)  | 549 KB |
 | Fast Ethernet (100 Mbps) | 1.2 MB |
 | OC-3 (155 Mbps)  | 1.8 MB |
@@ -1045,11 +1049,11 @@ It then folds this new sample into the timeout calculation as follows:
 ```pseudo
 Difference = SampleRTT - EstimatedRTT
 EstimatedRTT = EstimatedRTT + (delta x Difference)
-Deviation = Deviation + delta (|Difference| - Deviation)
+Deviation = Deviation + gamma (|Difference| - Deviation)
 ```
 
-where `delta` is a fraction between 0 and 1. That is, we calculate both
-the mean RTT and the variation in that mean.
+where `delta` and `gamma` are fractions between 0 and 1. That is, we
+calculate both the mean RTT and the variation in that mean.
 
 TCP then computes the timeout value as a function of both
 `EstimatedRTT` and `Deviation` as follows:
@@ -1116,6 +1120,20 @@ more intelligent about which segments it retransmits, draw better
 conclusions about the state of congestion, and make better RTT
 estimates. A TCP extension supporting this is described in a later
 section.
+
+{% if output.name == "ebook" %}
+> **Key Takeaway**
+{% else %}
+> [!Note|style:flat|label:Key Takeaway|iconVisibility:hidden]
+{% endif %}
+> There is one other point to make about computing timeouts. It is a
+> surprisingly tricky business, so much so, that there is an entire RFC
+> dedicated to the topic: [RFC 6298](https://tools.ietf.org/html/rfc6298).
+> The takeaway is that sometimes fully specifying a protocol involves
+> so much minutiae that the line between specification and
+> implementation becomes blurred. That has happened more than once
+> with TCP, causing some to argue that "the implementation **is** the
+> specification."
 
 ## Record Boundaries
 

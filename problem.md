@@ -37,6 +37,7 @@ Note that this list does not include all the functionality that
 application processes might want from the network. For example, it does
 not include security features like authentication or encryption, which
 are typically provided by protocols that sit above the transport level.
+(We discuss security-related topics in a later chapter.)
 
 From below, the underlying network upon which the transport protocol
 operates has certain limitations in the level of service it can provide.
