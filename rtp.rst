@@ -52,13 +52,12 @@ primary real-time transport protocol in use today, RTP.
 Much of RTP actually derives from protocol functionality that was
 originally embedded in the application itself. Two of the first such
 applications were ``vic`` and ``vat``, the former supporting real-time
-video and the latter supporting real-time audio. It's not unreasonable
-to say that all of today's commercial on-line conferencing products
-were derived from these two applications. They originally ran over UDP,
-while the designers figured out which features were needed to handle
-the real-time nature of the communication. Later, they realized that
-these features could be useful to many other applications and defined
-a protocol with those features, which became RTP.
+video and the latter supporting real-time audio. Both applications
+originally ran directly over UDP, while the designers figured out
+which features were needed to handle the real-time nature of the
+communication. Later, they realized that these features could be
+useful to many other applications and defined a protocol with those
+features, which became RTP.
 
 RTP can run over many lower-layer protocols, but still commonly runs
 over UDP. That leads to the protocol stack shown in :numref:`Figure %s
